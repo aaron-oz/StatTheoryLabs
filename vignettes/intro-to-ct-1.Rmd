@@ -5,7 +5,7 @@ author:
   - name          : "Prof AOZ (heavily borrowed from Prof. Stoudt)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{code-traning-1}
+  %\VignetteIndexEntry{intro-to-ct-1}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 
