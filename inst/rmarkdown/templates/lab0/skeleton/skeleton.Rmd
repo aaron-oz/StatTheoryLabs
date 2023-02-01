@@ -9,9 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Start here
+
+Slowly read through this file to learn how to use it. I encourage you to watch all video links and to read through external links when they are referenced. In this lab, you'll be learning how to build a reproducible lab report in RStudio using R Markdown.
+
 ## Creating a reproducible lab report
 
-We will be using R Markdown to create reproducible lab reports. See the following videos describing why and how.
+We will be using `R Markdown` to create reproducible lab reports. Watch both of the following videos describing why and how.
 
 [**Why use R Markdown for Lab Reports?**](https://youtu.be/lNWVQ2oxNho)
 
@@ -24,17 +28,25 @@ We will *not* be using the templates that the video references. Instead, we will
 
 In RStudio, if you want to create a new file from scratch, go to New File -> R Markdown. Often, I will give you a template that you can add to. Be sure to add your name to the author heading.
 
+### Knitting
+
+The template file that I gave you (this one) is an `R Markdown` file (`.Rmd`). Like in the above youtube video, it has code interspersed with writing. You can `knit` the code, its outputs, and the text together into a single document by clicking `Knit` in the top left of this pane. Try `knit`ting this document to an html file now. You can also try knitting it into a pdf or even a word document (gross!).
+
+### Working with reproducible code and RMarkdown
+
 Going forward you should refrain from typing your code directly in the console, and instead type any code (final correct answer, or anything you're just trying out) in the R Markdown file and run the chunk using either the Run button on the chunk  (green sideways triangle) or by highlighting the code and clicking Run on the top  right corner of the R Markdown editor.
 
 If at any point you need to start over, you can Run All Chunks above the chunk you're working in by clicking on the down arrow in the code chunk.
 
 ## Code Chunks
 
-This is a code chunk.
+This is a code chunk. Try running the code chunk by clicking the green right-facing arrow in the top-right corner of the code chunk.
 
 ```{r}
 library(openintro)
 ```
+
+You'll see the code in the chunk is passed to the console pane below, where it is evaluated/run. You'll also see that the output from the console is printed in two places: the console and beneath the code chunk in this file. This allows you to share the results of your code too.
 
 You can create a new chunk by typing three back-ticks (`) or by using the insert code chunk button (green box with a C on it).
 
@@ -47,11 +59,9 @@ You have (at least) four options to run a code chunk:
 - put your cursor on the line of code, and press `Ctrl-Shift-Enter` (hold `Ctrl-Shift` and press `Enter`), or
 - typing the code in the console.
 
-Try each method on this following chunk (remember, R can be used as a big calculator):
+**Task 0**: Try creating a new code chunk right below this line. Then, enter the expression `exp(pi)` into the chunk (remember, R can be used as a big calculator). Finally, try evaluating this expression with each of the 4 ways listed above
 
-```{r}
-exp(pi)
-```
+
 
 ## Looking at Data
 
@@ -75,7 +85,7 @@ Note: In this historical dataset, babies are classified by sex into "boys" and "
 
 However, printing the whole dataset in the console is not that useful. If you put a hashtag in front of `arbuthnot` the line becomes a comment and will not be run.
 
-**Task 2**: Comment the `arbuthnot` line so that when you "knit" the document to an html output, the whole dataset will not be printed.
+**Task 2**: Try knitting the document. See how the `dat` line causes the output from the data to be printed in your output file? Now comment out the `dat` in the above code chunk so that when you knit the document to an html output, the dataset won't be printec. 
 
 One advantage of RStudio is that it comes with a built-in data viewer.
 Click on the name `dat` in the *Environment* pane (upper right window) that lists the objects in your environment. This will bring up an alternative display of the data set in the *Data Viewer* (upper left window).
