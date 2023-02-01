@@ -1,4 +1,4 @@
-# StatTheoryLabs   
+# StatTheoryLabs
 learnr tutorials and labs for a mathematical statistics course
 
 ### To install this package:
@@ -15,14 +15,11 @@ learnr tutorials and labs for a mathematical statistics course
 
 `remotes::install_github("rundel/learnrhash")`
 
-`remotes::install_github("sastoudt/StatTheoryLabs", build_vignettes = T)`
+`remotes::install_github("aaron-oz/StatTheoryLabs", build_vignettes = T)`
 
+`remove.packages("htmltools")`
 
-2. Thanks to Marney for this one: after install is complete (I know this seems weird, but go with it):
-
-```remove.packages("htmltools")```
-
-```install.packages("htmltools")```
+`install.packages("htmltools")`
 
 Exit RStudio and then open it again.
 
@@ -30,13 +27,13 @@ Exit RStudio and then open it again.
 
 - These packages have more recent versions available. Which would you like to update? --> If the list only includes `htmltools` say No.
 
-- Do you want to install from sources the package which needs compilation? (in reference to `dplyr 1.0.3` instead of `dplyr 1.0.4`) --> No 
+- Do you want to install from sources the package which needs compilation? (in reference to `dplyr 1.0.3` instead of `dplyr 1.0.4`) --> No
 
 ### Launch a lesson:
 
 1. In the console (bottom left) type: `learnr::run_tutorial("ct-1", "StatTheoryLabs")`
 
-### Stop a lesson 
+### Stop a lesson
 
 1. Click stop sign on the left.
 
@@ -45,15 +42,15 @@ Exit RStudio and then open it again.
 #### Troubleshooting
 
 - If you get some kind of error having to do with "parse" when you try to run a tutorial:
-![](restartR.png) 
+![](restartR.png)
 
-Click "Session" --> "Restart R" and try to run the tutorial again. 
+Click "Session" --> "Restart R" and try to run the tutorial again.
 
-![](restartR2.png) 
+![](restartR2.png)
 
 - The tutorial will often pop up in a new browser tab automatically. If you have a popup blocker, you might need to turn it off or update the settings.
 
-![](popups.png) 
+![](popups.png)
 
 ## Available Vignettes
 
@@ -96,9 +93,8 @@ Note: your Google form might look a little different, but the instructions stay 
 
 #### Troubleshooting
 
-I can't see the Google Form at the end. 
+I can't see the Google Form at the end.
 
 Open in the browser (this should happen automatically if you use `run_tutorial` ), use Google Chrome, and make sure you are logged in to your Bucknell e-mail in the same browser (only Bucknell authenticated accounts can access the form to avoid any spam).
 
 **Run into any problems not listed above? Let me know and when we figure it out we'll add to the list.**
-
