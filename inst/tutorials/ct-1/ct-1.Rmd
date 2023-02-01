@@ -1,6 +1,9 @@
 ---
 title: "Coding Training 1: Intro to Interactive Tutorials"
-output: 
+shorttitle: "ct-1"
+author:
+  - name          : "Prof AOZ (heavily borrowed from Prof. Stoudt)"
+output:
   learnr::tutorial:
     progressive: true
     allow_skip: true
@@ -19,15 +22,14 @@ tutorial_options(
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-
 ## How this works
 
 These tutorials take you step by step through content with text mixed with code chunks. These code chunks can be run and reveal output all within the self-contained tutorial. You do not need to copy and paste back and forth to the RStudio Console. You can get immediate feedback about whether your answers are right and wrong so that you can learn by trial and error without having to wait for feedback from me.
 
-However, these tutorials do time out and are not guaranteed to save your progress. You should wait to start these tutorials until you have a dedicated block of time to complete them in one sitting. I know this isn't ideal, but that is a limitation of this setup. 
+However, these tutorials do time out and are not guaranteed to save your progress. You should wait to start these tutorials until you have a dedicated block of time to complete them in one sitting. I know this isn't ideal, but that is a limitation of this setup.
 
 
-### Exercise 
+### Exercise
 
 *Here's a simple exercise with an empty code chunk provided for entering the answer. You can type*
 
@@ -45,15 +47,15 @@ Write the R code required to add two plus two. Note: R is really just a big calc
 ```{r twoplustwo-check}
 # check code
 gradethis::grade_code()
-```   
-   
+```
+
 
 
 ### Exercise with Hint
 
-*Here's an exercise where the code chunk is pre-populated with a fill-in-the-blank structure. There is also a "hint" to the correct solution available.*
+*Here's an exercise where the code chunk is pre-populated with a fill-in-the-blank structure. There is also a "hint" to the correct solution available. `mtcars` is a data array object. The `R` function `head()` prints the first few lines of an array. In `R` you can input arguments into functions by specifying them inside the function parentheses. If you would ever like to get more information about how to use a function, you can easily open a help file for a function by writing a `?` in front of the function name.*
 
-Modify the following code to limit the number of rows of the dataset `mtcars` to be printed:
+Modify the following code to print the first few rows of the dataset `mtcars`:
 
 ```{r print-limit, exercise=TRUE}
 ___(mtcars)
@@ -62,6 +64,38 @@ ___(mtcars)
 ```{r print-limit-hint}
 head(mtcars)
 ```
+
+*If you would ever like to get more information about how to use a function, you can easily open a help file for a function by writing a `?` in front of the function name.*
+
+Try opening the help file for the function `head()`. Under `Arguments`, read about how to you cound print out 10 lines of code.
+```{r help-head, exercise=TRUE}
+
+```
+
+```{r help-head-hint}
+?head
+```
+
+Try printing out the first 10 lines of code.
+
+```{r, print-ten-lines, exercise=TRUE}
+head(mtcars, ___)
+```
+
+```{r print-ten-lines-hint}
+head(mtcars, n=10)
+```
+
+```{r print-ten-lines-solution}
+# solution code
+head(mtcars, n=10)
+```
+
+```{r print-ten-lines-check}
+# check code
+gradethis::grade_code()
+```
+
 
 ### Quiz
 
@@ -81,20 +115,18 @@ quiz(
 
 ## Submit progress
 
-As you have gone through this tutorial, your progress has been kept track of in something called a "hash". I can use this to make sure you have executed all of the code chunks and answered all of the questions. I will use this to give you a completion grade for this assignment. 
-
-If a Google Form window does not appear, you can access it [here](https://docs.google.com/forms/d/e/1FAIpQLScVRKB7vRsjD-Swc3RzSc01G-eCDZF4cYI3TI89dYOhTMdW2Q/viewform).
+As you have gone through this tutorial, your progress has been kept track of in something called a "hash". I can use this to make sure you have executed all of the code chunks and answered all of the questions. I will use this to give you a completion grade for this assignment.
 
 ```{r context="server"}
 learnrhash::encoder_logic(strip_output = T)
 ```
 
-```{r encode, echo=FALSE}
+ ```{r encode, echo=FALSE}
 learnrhash::encoder_ui(
-  ui_before = div(strong("Submit your hash in the form below."), br(), br()),
-  ui_after  = learnrhash::iframe_ui(
-    src = "https://docs.google.com/forms/d/e/1FAIpQLScVRKB7vRsjD-Swc3RzSc01G-eCDZF4cYI3TI89dYOhTMdW2Q/viewform", 
-    width="900px", height= "1000px"
+  ui_before = div(strong("Click the button to generate your hash and copy it to your clipboard."), br(), br())
   )
-)
 ```
+
+Click [here](https://www.gradescope.com/courses/487999/assignments/) to go to Gradescope to submit your hash.
+
+And that's it, folks!
