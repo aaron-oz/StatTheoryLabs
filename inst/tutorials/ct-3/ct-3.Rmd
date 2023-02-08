@@ -261,8 +261,6 @@ If you had derived this expected value of the maximum by hand you could check yo
 
 As you have gone through this tutorial, your progress has been kept track of in something called a "hash". I can use this to make sure you have executed all of the code chunks and answered all of the questions. I will use this to give you a completion grade for this assignment. 
 
-If a Google Form window does not appear, you can access it [here](https://docs.google.com/forms/d/e/1FAIpQLScVRKB7vRsjD-Swc3RzSc01G-eCDZF4cYI3TI89dYOhTMdW2Q/viewform).
-
 ```{r context="server"}
 learnrhash::encoder_logic(strip_output = T)
 ```
