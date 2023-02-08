@@ -80,16 +80,18 @@ gradethis::grade_code()
 
 ### Matrices
 
-What are the dimensions of the following matrix? Use `dim` to find out. Read the help file for the function for more guidance on what this function returns if it isn't clear from the following example.
+What are the dimensions of the following matrix? Update the code block to use `dim` to find out. Read the help file for the function for more guidance on what this function returns if it isn't clear from the following example.
 
 ```{r makeMatrix, exercise = TRUE}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 dim(___)
 ```
 
 ```{r makeMatrix-solution}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 dim(mymatrix)
 ```
@@ -105,6 +107,7 @@ We can access specific rows of a matrix with `[,]` - for example, `mymatrix[2,]`
 
 ```{r makeMatrix2, exercise = TRUE}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 mymatrix[c(2,3),]
 ```
@@ -113,6 +116,7 @@ Assign the first row of `mymatrix` to a variable named `row1`. Use the function 
 
 ```{r matrixWork, exercise = TRUE}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 ___ <- mymatrix[___]
 summary(___)
@@ -120,6 +124,7 @@ summary(___)
 
 ```{r matrixWork-solution}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 row1 <- mymatrix[1,]
 summary(row1)
@@ -134,6 +139,7 @@ To get a single element in a matrix, we use row and column numbers, such as `mym
 
 ```{r matrixWork2, exercise = TRUE}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 mymatrix[1,2]
 ```
@@ -143,12 +149,14 @@ Display the submatrix that contains the first two rows and second column of `mym
 
 ```{r matrixWork3, exercise = TRUE}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 mymatrix[___, ___]
 ```
 
 ```{r matrixWork3-solution}
 mymatrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+mymatrix
 
 mymatrix[c(1,2), 2]
 ```
@@ -171,6 +179,8 @@ row2 == 1
 
 
 You can also combine two conditions with the AND (`&`) and OR (`|`) operators.
+
+Interestingly, `R` allows mathematical operations to be performed on `TRUE\FALSE` logicals. `TRUE`s evaluate to 1 and `FALSE`s evaluate to 0.
 
 ```{r log2, exercise = TRUE}
 row2 <- c(1, 2, 3, 1)
@@ -221,7 +231,8 @@ col1[___]
 col1 <- c(4, 5, 6, 4)
 col3 <- c(1, 1, 3, 2)
 
-col1[col3 == 1]
+col1[which(col3 == 1)]
+# col1[col3 == 1] # also works 
 ```
 
 ```{r subset1-check}
@@ -277,7 +288,7 @@ gradethis::grade_code()
 
 *Note:* when your data values are text, i.e. letters or words, to use the == sign or any of these other logical operators, you need to put quotes around the text. For example, `col1 == "A"`.
 
-## Distributiuons in R
+## Distributions in R
 
 We are often interested in generating a set of data.  If we just want a random sample from a set of numbers, the `sample()` function can be used.  For example if I want 5 random draws from the integers `1:100` **with replacement**, I could use:
 

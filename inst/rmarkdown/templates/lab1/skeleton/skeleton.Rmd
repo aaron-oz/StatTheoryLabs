@@ -1,7 +1,7 @@
 ---
 title: "Lab 1: Template"
 author: "Your Name"
-date: "2/14/2022"
+date: "2/8/2023"
 output: html_document
 ---
 
@@ -79,7 +79,7 @@ You will edit this lab1-template.Rmd in your project. Throughout this tutorial y
 
 When you are finished editing your R Markdown document click the "Knit" button and choose "Knit to HTML" in the top left corner of RStudio. This will run all of your code and create a formatted document of the output. If you get an error, it means something in your R Markdown file isn't right, either an error in code or some error in formatting. 
 
-Submit your R Markdown document and knitted file to Moodle as:
+Submit your R Markdown document and knitted file to Gradescope as:
 
 LastName-L-01.Rmd 
 
@@ -87,7 +87,7 @@ LastName-L-01.html
 
 To get these files onto your own computer, look in the "Files" pane in the bottom right. Check the boxes next to the two files you want to export, click the "More" button (with a little blue gear), click "Export". Make sure you are exporting the files to a place where you can find them on your own computer. 
 
-*Due*: Friday, February 18th at 5 PM
+*Due*: Friday, February 10th at 11 am
 
 ## What does capture-recapture data tell us about the detection probability?
 
@@ -99,13 +99,17 @@ In the long run $p$ should be a good estimate of the probability of detection fo
 
 If we knew $p$, we could estimate $N$ as $n_1/p$.
 
-We don't know $p$, but we do have some extra information thanks to our capture-recapture sampling strategy: the number of individuals we capture on day 2, $n_2$, and the number of individuals we saw on both days, $m_2$.
+We don't know $p$, but we do have some extra information thanks to our capture-recapture sampling strategy: the number of individuals we capture on day 2, $n_2$, and the number of individuals that were seen both days (those observed on day 1 that were again observed on day 2), $m_2$.
 
 Assume every individual of the species has the same probability of being detected. This is another big assumption as some members of the species may be more or less visible (for example, due to different sizes) or more or less shy than others.
 
 Frederick Charles Lincoln and C.G. Johannes Petersen recognized that:
 
-$$\frac{m_2}{n_2} = \frac{n_1}{N}$$
+$$\frac{m_2}{n_2} = \frac{n_1}{N},$$
+
+or, equivalently, 
+
+$$\frac{m_2}{n_1} = \frac{n_2}{N}.$$
 
 **Question 1: Explain in words why this is true.**
 
@@ -125,7 +129,7 @@ Lincoln and Peterson reasoned their way to this estimator. What if we wanted to 
 
 Let's define some notation to help us reason a different way about this problem. We capture, tag, and release $n_1$ animals on day 1. We then capture $n_2$ animals on day 2, $m_2$ of them are tagged (and hence seen on day 1). What is the total abundance $N$? This is a combinatorics problem.
 
-The total number of ways we could have seen $n_2$ animals on day 2 if $N$ were possible is ${N \choose n_2}$.
+Assume that the day 1 observation of $n_2$ is fixed and we are interested in looking at ways we could have observed animals on day 2. The total number of ways we could have seen $n_2$ animals on day 2 if $N$ were possible is ${N \choose n_2}$.
 
 The total number of ways we could have seen $n_2$ animals in our particular way (with $m_2$ repeats and $n_2-m_2$ new animals) was to choose $m_2$ animals to see twice out of $n_1$ possible animals we've already seen once and to choose $n_2 - m_2$ new animals out of $N-n_1$ to see for the first time. 
 
@@ -135,7 +139,7 @@ $$\frac{{n_1 \choose m_2}{N-n_1 \choose n_2 - m_2}}{{N \choose n_2}}$$
 
 **Question 2**: What is this distribution and what are its expectation and variance? 
 
-*Hint:* We have seen this distribution and derived these properties before. You will need to translate between two notations, but once you have identified the distribution, your book/distribution table will be helpful in finding the expectation and variance.
+*Hint:* You have seen this distribution before. Feel free to use your distribution table, though be careful to correctly translate notation.
 
 *Hint:* Consider an individual that you spot on the second day. It is either a new individual you did not see on day one or it is a repeat that you saw on day one. Where have we seen something that considers a finite number of elements that have two characteristics?
 
@@ -169,11 +173,11 @@ It is a function of of the data (individual sightings summarized by $n_1$, $n_2$
 
 - As a RV, $\hat{N}_{LP}$ has a sampling distribution.
 
-This is the distribution of values of $\hat{N}_{LP}$ produced from all possible samples of the same size from the population (n_1 and n_2 are the same but m_2 may differ).
+This is the distribution of values of $\hat{N}_{LP}$ produced from all possible samples of the same size from the population ($n_1$ and $n_2$ are the same but $m_2$ may differ).
 
 - We would like $\hat{N}_{LP}$ to be unbiased.
 
-i.e. The sampling distribution of $\hat{N}_{LP}$ is centered at $N$
+i.e. The sampling distribution of $\hat{N}_{LP}$ is centered at $N$: E$[\hat{N}_{LP}]=N$.
 
 - We would like $\hat{N}_{LP}$ to have small variance.
 
@@ -201,9 +205,11 @@ The above estimators depends on three different parameters which are hard to var
 
 ## Asymptotics 
 
-The estimate approaches the truth (is asymptotically unbiased) as the "sample size" gets larger. I personally find it a bit ambiguous which sample size we are referring to: $n_1$? $n_2$? $N$? $m_2$? And they all are connected a bit.
+Generally, statistical asymptotics deal with the properties of estiamtors in the limit, most often as the observed sample size tends to infinity.
 
-All else equal, we should improve our estimate as $m_2$ gets larger. However, how close we get to the truth is limited by $n_1$ as $m_2 \leq n_1$. This intuitively makes sense. The information lies in the number of repeats v. the number tagged. If these are close, then we have a large detection probability for those tagged individuals (and hence all of the individuals since we are assuming they are the same).
+In our current setting, the estimate approaches the truth (is asymptotically unbiased) as the "sample size" gets larger. I personally find it a bit ambiguous which sample size we are referring to: $n_1$? $n_2$? $N$? $m_2$? And they all are connected a bit.
+
+All else equal, we should improve our estimate as $m_2$ gets larger. However, how close we get to the truth is limited by $n_1$ as $m_2 \leq n_1$. This intuitively makes sense. The information lies in the number of repeats versus the number tagged. If these are close, then we have a large detection probability for those tagged individuals (and hence all of the individuals since we are assuming they are the same).
 
 In the extreme case, if $n_1 = N$, then we need $m_2 = n_1$ to get our estimate exactly right. If $n_1 < N$ then the closest we can get to the truth is $\frac{n_1 n_2}{n_1} = n_2$ when $m_2 = n_1$. This shows that the second day's sample also affects the overall quality even under ideal conditions on the first day.
 
