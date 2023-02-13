@@ -1,5 +1,5 @@
 ---
-title: 'HW 7: Template'
+title: 'HW 9: Template'
 author: "Your Name"
 date: "1/31/2022"
 output: html_document
@@ -93,17 +93,17 @@ gamma_data$x ## vector
 
 ```
 
-## Homework 7, Question 4
+## Homework 9, Question 3
 
-Recall that on HW #6, I asked you to write down (but not solve) the equations that you would need to maximize to find the MLEs for $(\alpha, \beta)$ from a Gamma distribution. These partial derivatives are not something that we would want to do by hand (taking the derivative of the gamma function is not too fun), so instead, we will find the MLEs numerically. 
+Recall that on a previous homework, I asked you to write down (but not solve) the equations that you would need to maximize to find the MLEs for $(\alpha, \beta)$ from a Gamma distribution. These partial derivatives are not something that we would want to do by hand (taking the derivative of the gamma function is not too fun), so instead, we will find the MLEs numerically. 
 
-**4a)** Write the code for gamma.lik, the log-likelihood function of a Gamma$(\alpha, \beta)$. Note, that this function will now have a vector for the `pars` argument. 
+**3a)** Write the code for gamma.lik, the log-likelihood function of a Gamma$(\alpha, \beta)$. Note, that this function will now have a vector for the `pars` argument. 
 
 ```{r}
 
 ```
 
-**4b)** Read in "gamma_data.csv" from Moodle (make sure it is in the same folder as your Rmd file) and optimize this data with starting values of (1, 1) for $(\alpha, \beta)$.
+**3b)** Read in "gamma_data.csv" from Moodle (make sure it is in the same folder as your Rmd file) and optimize this data with starting values of (1, 1) for $(\alpha, \beta)$.
 
 Note: if you use `read.csv()`, R will read in the data as a data frame and your likelihood function will not be able to handle an object of that class. To avoid this issue, you will have to pull off the `x` column from the data (`dataname$x`) and pass that into your likelihood function.
 
@@ -115,7 +115,7 @@ Note: if you use `read.csv()`, R will read in the data as a data frame and your 
 
 
 
-**4c)** What are your MLEs for $(\alpha, \beta)$?
+**3c)** What are your MLEs for $(\alpha, \beta)$?
 
 
 ```{r}
