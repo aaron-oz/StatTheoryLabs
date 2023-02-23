@@ -1,7 +1,7 @@
 ---
 title: 'Lab 2: Template'
 author: "Your Name"
-date: "3/2/2022"
+date: "2/24/2023"
 output: html_document
 ---
 
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Some logistics for Lab 2
 
-Submit your R Markdown document and knitted file to Moodle as:
+Submit your R Markdown document and knitted file to Gradescope as:
 
 LastName-L-02.Rmd 
 
@@ -24,7 +24,7 @@ To get these files onto your own computer, look in the "Files" pane in the botto
 
 ##  Sampling Distributions
 
-Recall that the sampling distribution of an estimator is the distribution of values of that estimator taken from all possible samples of the same size from the population.
+Recall that the sampling distribution of an estimator is the distribution of values of that estimator taken from all possible samples of the same size from the population. To help differentiate between the population standard deviation and the sampling distribution standard deviation, recall that we call the standard deviation of the sampling distribution the **standard error**.
 
 For example, we can simulate the (approximate) sampling distribution for the mean of an exponential distribution with parameter $\beta = 15$.
 
@@ -48,7 +48,7 @@ qqnorm(my_means)
 qqline(my_means)
 ```
 
-## Illustrating the CLT
+## Illustrating the Central Limit Theorem (CLT)
 
 The CLT states that if $X_1, X_2, ..., X_n \sim^{iid} f_X$, where $f_X$ has mean $\mu$ and variance $\sigma^2 < \inf$, then
 
@@ -65,21 +65,21 @@ How did we do? Was $n=100$ large enough for the CLT to "kick in"?
 
 Perform the code annotation steps on the code chunk in the Sampling Distribution section above.
 
-1. Do an initial reading of each code chunk. Note any questions that pop into your head. If you do this inline, use a hashtag (#) to add a comment.
+**a.)** Do an initial reading of each code chunk. Note any questions that pop into your head. If you do this inline, use a hashtag (#) to add a comment.
     
-2. Identify any functions you do not understand and look them up using the help function `help(function_name)` or the "Help" tab in the bottom right pane. Make sure you understand the input paramters and the form of the output. 
+**b.)** Identify any functions you do not understand and look them up using the help function `help(function_name)` or the "Help" tab in the bottom right pane. Make sure you understand the input paramters and the form of the output. 
     
-3. Identify any overall structure. Is a subtask repeated multiple times? How many times?
+**c.)** Identify any overall structure. Is a subtask repeated multiple times? How many times?
       
-4. For each object, predict their size. Check your intuition using `dim` or `length`. You may also want to use `class` to identify the type of an object.
+**d.)** For each object, predict their size. Check your intuition using `dim` or `length`. You may also want to use `class` to identify the type of an object.
     
-5. Write a one to two sentence description of what the code chunk does that someone without a coding background could understand.
+**e.)** Write a one to two sentence description of what the code chunk does that someone without a coding background could understand.
 
 ## Question 2
 
 **a.)** Consider the exponential distribution with $\beta$= 20.
 
-**(i)** Generate 1000 values from this distribution and calculate the median. Pay attention to the parameterization of the Exponential distribution in R.
+**(i)** Generate 1000 values from this distribution and calculate and report the median. Pay attention to the parameterization of the Exponential distribution in R.
 
 ```{r}
 
@@ -126,7 +126,7 @@ hist(my_medians)
 
 ```
 
-**b.)** Let $X_1, X_2, ..., X_n \sim^{iid} Exponential(\beta)$. Recall that (be able to show that) $X_{(1)} \sim Exp(\frac{\beta}{n})$. Simulate the sampling distribution of $X_{(1)}$ for samples of size $n=25$ from an exponential distribution with $\beta = 7$. Compare the theoretical expected value of $X_{(1)}$ to the simulated expected value.
+**b.)** Let $X_1, X_2, ..., X_n \sim^{iid} Exponential(\beta)$. Recall that (be able to show that) $X_{(1)} \sim Exp(\frac{\beta}{n})$. Simulate the sampling distribution of $X_{(1)}$ for samples of size $n=25$ from an exponential distribution with $\beta = 7$ (that is, 1000 times you should simulate 25 exponentials and store only the smallest). Compare the theoretical expected value of $X_{(1)}$ to the simulated expected value.
 
 ```{r}
 num_sim <- 1000
@@ -236,7 +236,7 @@ sd(my_means)
 
 ## Question #4
 
-We claimed in class that the sample mean and the sample variance are independent if an only if the sample is drawn from a Normal distribution. The proof of this result is relatively complicated, but we will try to verify it with simulations.
+We will claim in class that the sample mean and the sample variance are independent if an only if the sample is drawn from a Normal distribution. The proof of this result is relatively complicated, but we will try to verify it with simulations.
 
 **a.)** Create a `for` loop of 1000 replications that first samples 200 observations from a $N(1, 1)$, and then calculates and stores the sample mean and sample variance of each set of simulated data. This should leave you with 1000 means and 1000 variances.
 
