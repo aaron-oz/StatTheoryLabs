@@ -214,9 +214,9 @@ Here's some pseudo-code for the bootstrap interval:
 
 Submit your R Markdown document and knitted file to Moodle as:
 
-LastName-L-04.Rmd
+LastName-L-03.Rmd
 
-LastName-L-04.html
+LastName-L-03.html
 
 To get these files onto your own computer, look in the "Files" pane in the bottom right. Check the boxes next to the two files you want to export, click the "More" button (with a little blue gear), click "Export". Make sure you are exporting the files to a place where you can find them on your own computer.
 

@@ -9,3 +9,4 @@ inst/doc
 *.png
 /inst/.DS_Store
 /inst/rmarkdown/.DS_Store
+/inst/rmarkdown/templates/.DS_Store

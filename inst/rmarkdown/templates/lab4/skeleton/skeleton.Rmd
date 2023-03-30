@@ -9,11 +9,86 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, error=TRUE}
 library(tidyverse)
 library(infer)
-set.seed() ## set your seed
 ```
+
+
+## Pipes in R
+
+For convenience, we're going to introduce how to 'pipe' in R. Generally, in programming, a pipe is a temporary software connection that allows outputs from one command to be automatically fed into a following command. This allows for efficient chains of processing without the need to name and store all intermediate objects. In R, the symbol used to create a pipe between two functions is denoted with `%>%`. This allows you to connect the output from some lhs process into a rhs process by: `lhs %>% rhs`.
+
+For example, starting with a data object called `df`, here's how we might use three different functions to sequentially process the data:
+
+```
+temp.obj1 <- do_this_operation(df)
+temp.obj2 <- then_do_this_operation(temp.obj1)
+final.obj <- then_run_final_operation(temp.obj2)
+```
+
+Or, we could run this code using nested functions, but (as you'll read later) this can be hard to read and when you do read it, it's not in the natural order that the functions are actually called:
+
+```
+final.obj <- then_run_final_operation(then_do_this_operation(do_this_operation(df)))
+```
+
+This can be more easily and efficiently coded with pipes as:
+
+```
+df %>% 
+  do_this_operation %>% 
+  then_do_this_operation %>%
+  then_run_final_operation
+```
+
+Here's a real example without and with pipes. Think through what this code does! You may need to read up on the `apply()` function.
+
+Without pipes:
+```{r, error=TRUE}
+set.seed(413)
+m <- 7
+n <- 9
+r.vec <- rnorm(n=n*m, mean=3, sd=2)
+r.mat <- matrix(r.vec, nrow=n, ncol=m)
+summ  <- apply(r.mat, 2, mean)
+summ ## print
+```
+
+And again with pipes:
+```{r, error=TRUE}
+set.seed(413)
+m <- 7
+n <- 9
+summ2 <- rnorm(n=n*m, mean=3, sd=2) %>%
+           matrix(nrow=n, ncol=m) %>%
+           apply(2, mean) %>%
+           print ## this prints the final output, but we've also saved it as the summ2 object using the assignment (<-) at the start
+```
+
+Note that the `%>%` pipe defaults to placing the previous outcome into the first argument that the next function takes. You can specify that the pipe should drop the lhs output into a different argument on the rhs using a period `.` in the rhs function call. For example, `y %>% f(x, .)` is equivalent to `f(x, y)`. That example was taken from the pipe documentation in R.
+
+The other nice thing about pipes is that it allows you to write your code in an order that more naturally reflects the order of processing. This can make your code easier to understand (and to write). That is, it lets you rewrite `i(h(g(f(x))))` into the order that the function calls actually happen: `x %>% f %>% g %>% h %>% i`.
+
+Your turn: Take the following code snippet with many nested functions:
+
+```{r, error=TRUE}
+# Initialize `x`
+x <- c(0.109, 0.359, 0.63, 0.996, 0.515, 0.142, 0.017, 0.829, 0.907)
+
+# Compute the logarithm of `x`, return suitably lagged and iterated differences, 
+# compute the exponential function and round the result
+round(exp(diff(log(x))), 1)
+```
+
+and rewrite in this empty code block using pipes:
+
+```{r, error=TRUE}
+## your turn to try piping
+
+```
+
+That's enough on pipes for now, but you can read more about their extended use cases here: https://magrittr.tidyverse.org/reference/pipe.html
 
 ## Question 1
 
@@ -23,7 +98,7 @@ Consider a population that has a gamma distribution with parameters $\alpha = 5$
 
 **a.)** Describe the approximate sampling distribution for the mean shown below. A description of a distribution should include a discussion of its center, spread, and shape.
 
-```{r}
+```{r, error=TRUE}
 n <- 200
 xbars <- rep(NA, n)
 
@@ -44,17 +119,18 @@ ggplot(xbars, aes(x = x)) +
 
 **b.)** Take a sample from the population described above. Find the mean and standard deviation of this sample.
 
-```{r}
+```{r, error=TRUE}
 n <- 200
-samp <- rgamma(n =  ___, ___, ___)
+samp <- rgamma(n = ___, ___, ___)
 
 mean(___)
 sd(___)
 ```
 
+
 There is a package in R that implements the bootstrap for many different scenarios called `infer`. Use it to find the bootstrap mean and standard error of the bootstrap distribution for your sample.
 
-```{r}
+```{r, error=TRUE}
 samp <- data.frame(x = samp)
 boot_dist <- samp %>%
   specify(response = x) %>%
@@ -65,7 +141,7 @@ head(boot_dist) ## based on your understanding of what happens in the bootstrap 
 
 visualize(boot_dist) ## based on your understanding of what happens in the bootstrap procedure, what is being plotted here?
 
-
+# calculate mean and standard error of the bootstrap dist'n.
 mean(___$stat)
 sd(___$stat)
 ```
@@ -86,7 +162,7 @@ sd(___$stat)
 
 - What is the sample mean and standard deviation?
 
-```{r}
+```{r, error=TRUE}
 n <-
 samp <- rgamma(n =  ___, ___, ___)
 
@@ -98,7 +174,7 @@ sd(___)
 
 - What is the mean and standard deviation of the bootstrap distribution of $\bar{X}$?
 
-```{r}
+```{r, error=TRUE}
 samp <- data.frame(x = samp)
 boot_dist <- samp %>%
   specify(response = x) %>%
@@ -120,7 +196,8 @@ Now we will code the bootstrap ourselves instead of relying on `infer`. Let $X_1
 
 **a.)** Create a data set named `xs` of $n = 100$ observations from the above distribution using $\mu = 5$.
 
-```{r }
+```{r, error=TRUE}
+set.seed(98117)
 n <-
 xs <- rnorm(n= , mean = , sd = )
 xs <- data.frame (x = xs)
@@ -131,14 +208,15 @@ xs <- data.frame (x = xs)
 
 Hint: Check out the help for the function `exp`.
 
-```{r}
+```{r, error=TRUE}
 
 ```
 
-**c.)** Based on the pseudocode we wrote in the evening coding session build your bootstrap distribution of $\hat{\theta}_n$ ($B = 10000$).
+**c.)** Based on your understanding of the bootstrap procedure and the code we wrote in class (on moodle if you want), build your bootstrap distribution of $\hat{\theta}_n$ ($B = 10000$).
 
 
-```{r}
+```{r, error=TRUE}
+set.seed(01060)
 B <- ___
 
 theta_hat_n_boot <- ___ ## create a place to store the value of theta_hat_n (you may want to refer to the loops examples in code training 3)
@@ -158,7 +236,7 @@ hist(___) ## plot the bootstrap distribution
 
 **d.)** Use this distribution to get $se_{boot}$ and three 95% confidence intervals for $\theta$ (normal interval, bootstrap percentile interval, bootstrap pivotal interval). You may want to check out the help page for the `quantile` function.
 
-```{r}
+```{r, error=TRUE}
 se_boot <- ___
 se_boot
 
@@ -176,7 +254,7 @@ bootstrap_pivotal_interval
 
 **e.)** Plot a histogram of the bootstrap replications and describe the distribution. This is the bootstrap distribution of $\hat{\theta}_n$. Try using `ggplot` this time.
 
-```{r}
+```{r, error=TRUE}
 ## ggplot needs a dataframe with column names
 ## there is an example in this document about how to take a vector and make it into a dataframe with one column
 
@@ -184,7 +262,7 @@ bootstrap_pivotal_interval
 
 **f.)** Plot a histogram of the 'true' sampling distribution and describe the distribution. Hint: The sampling distribution is defined as the distribution of $\hat{\theta}_n$ calculated from every possible sample of the same size from the population. For simplicity, build the sampling distribution using 10000 random samples from the population (not from the original sample).
 
-```{r}
+```{r, error=TRUE}
 ## you may want to refer to lab 2
 
 
@@ -202,7 +280,7 @@ Let $X_1, X_2, ..., X_n \sim_{iid} N(\theta, 1)$. The plug-in estimate of $\thet
 
 **b.)** Now take $\theta = 0$, $n=5$ and conduct a simulation. In this simulation, you will create 100 bootstrap distributions. Each time you simulate a bootstrap distribution, estimate the standard error. To keep this manageable, use B = 200 in the bootstrap and use 100 simulations. You will then get 100 bootstrap standard errors, $se_1, ..., se_{100}$. Hint: This will require a double for loop, with the outer loop for the 100 simulations and the inner loop for computing the 200 bootstrap replications.
 
-```{r}
+```{r, error=TRUE}
 B <- ___ ## number of times to resample in one bootsrap procedure
 num_sims <- ___ ## number of times to repeat the bootstrap
 n <- ## sample size
@@ -231,7 +309,7 @@ hist() ## plot the distribution of standard error estimates
 
 **c.)** To assess the accuracy of the bootstrap, compute the mean of $\frac{|se_1 - se|}{se}, ... \frac{|se_{100} - se|}{se}$. What is your conclusion about the accuracy of the bootstrap standard error?
 
-```{r}
+```{r, error=TRUE}
 true_se <- ## put the value you determined in a here
 true_se
 
@@ -240,7 +318,7 @@ mean(abs(std_err_ests - true_se))
 
 **d.)** Repeat for $n=50$ and comment on the accuracy.
 
-```{r}
+```{r, error=TRUE}
 n <- ## sample size
 
 std_err_ests <- ____ ## create space to store results
@@ -265,7 +343,7 @@ for(j in 1:___){
 hist() ## plot the distribution of standard error estimates
 ```
 
-```{r}
+```{r, error=TRUE}
 true_se <- ## put the value you determined in a here
 true_se
 
@@ -290,14 +368,14 @@ Hint: This all happens in a single loop.
 
 **a.)** The data set `IceCream` (provided on Moodle) contains calorie information for a sample of brands of chocolate and vanilla ice cream. Use a 95% bootstrap percentile interval to determine whether or not there is a difference in the average number of calories. Include a histogram of your bootstrap distribution.
 
-```{r}
+```{r, error=TRUE}
 ## read in IceCream.csv
 ## you will need to make sure the file is in the same place as this Rmd file
 
 ## look at what columns you have access to
 ```
 
-```{r}
+```{r, error=TRUE}
 B <- ___
 n <- nrow(___) ## how many samples do you have in your data
 
@@ -320,21 +398,26 @@ hist(___) ## plot the bootstrap distribution
 **b.)** Would you expect the 95% bootstrap normal interval to be similar to that in (a)? Why or why not?
 
 
+## Opportunity for Extra Credit 
+
+Complete the Dolphin Activity from 216 by coding up an approximate permutation test. See the dolphin activity handout on moodle for the specifics. That is:
+
+**a).** Generate the permutation test distribution of the difference in improved depression scores using B=10000. 
+
+**b).** Calculate and report the probability that, under the hypothesis of no treatment difference, we would see a difference in the proportion of improved depressions scores as or more extreme than that observed in the dataset.
+
+**c).** Do you think it's likely that the dolphin treatment actually leads to more improved depression scores (ie that it's effective), or does it seem likely that the observed differences between the dolphin treatment and control can be attributed to random chance? Why?
+
 
 ## Deliverables
 
 Submit your R Markdown document and knitted file to Moodle as:
 
-LastName-L-03.Rmd
+LastName-L-04.Rmd
 
-LastName-L-03.html
+LastName-L-04.html
 
 To get these files onto your own computer, look in the "Files" pane in the bottom right. Check the boxes next to the two files you want to export, click the "More" button (with a little blue gear), click "Export". Make sure you are exporting the files to a place where you can find them on your own computer.
-
-**Opportunity for Extra Credit:** Complete the Dolphin Activity from 216. If you are interested in this, see me for props on Wednesday. The instructions and the histogram generated by my 216 class are on Moodle. Where would your post-it note fall? Answer this question as part of your worksheet too: How likely is your observed statistic (or something more extreme) assuming there is no effect of dolphin therapy on depression? [how would you use this histogram to find out?]
-
-
-I need the yellow/white cards back when you turn this in, so don't write on them or lose them. You can either turn in the worksheet (and props) in class on Friday or scan in the worksheet to Moodle by 5 PM on Friday and bring the props to class on Monday.
 
 
 * * *
