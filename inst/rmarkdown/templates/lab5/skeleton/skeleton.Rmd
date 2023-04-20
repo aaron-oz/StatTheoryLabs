@@ -1,9 +1,11 @@
 ---
 title: "Lab 5 Template"
 author: "Your Name"
-date: "4/27/2022"
+date: "Today's Date"
 output: html_document
 ---
+
+*Due*: Monday, April 24, before class.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -12,8 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 You will need two new packages. Recall that you only have to install once.
 
 ```{r}
-install.packages("EnvStats") ## run once and then comment out
-install.packages("palmerpenguins") ## run once and then comment out
+#install.packages("EnvStats") ## run once and then comment out
+#install.packages("palmerpenguins") ## run once and then comment out
 ```
 
 ```{r}
@@ -90,13 +92,35 @@ Infections following surgery is a serious concern that can have a major impact o
 
 ```
 
+## Exercise 4
+
+In this exercise, you will be simulating type I and type II errors from one-sample test for the population mean. Consider data $X_1, \ldots, X_n\stackrel{iid}{\sim} f_X(x)$ with unknown mean and variance. For the purpose of the simulation, we will be sampling data from a Logistic distribution with location parameter 12 and scale parameter 2 (look up `dlogis()` for more information), but you should treat the inferential steps as if this information is unknown.
+
+**Part (a)**
+
+Using a sample size of 50, and using an approximate HT for the mean (via the CLT) to test $H_0=12$ vs $H_1>12$, simulate the probability of a Type I error if you were to use a rejection region of the form $\overline{X} > 12.86$.
+
+```{r}
+
+
+```
+
+**Part (b)**
+
+Using the same setup as in 4(a), simulate the probability of a Type II error if the true population mean was actually equal to 12.5. Repeat the same process assuming the true population mean was equal to 13.0, and then again for 13.5. Does the changes in Type II error for these three different alternative truths follow the pattern that you would expect? Explain why or why not.
+
+```{r}
+
+
+```
+
 ## Extra Credit Opportunity
 
-Print out and complete the Gallup confidence interval worksheet. Scan and upload to Moodle.
+Print out and complete the Gallup confidence interval worksheet. Scan and submit to Gradescope.
 
 ## Deliverables
 
-Submit your R Markdown document and knitted file to Moodle as:
+Submit your R Markdown document and knitted file to Gradescope as:
 
 LastName-L-05.Rmd
 
@@ -104,9 +128,6 @@ LastName-L-05.html
 
 To get these files onto your own computer, look in the "Files" pane in the bottom right. Check the boxes next to the two files you want to export, click the "More" button (with a little blue gear), click "Export". Make sure you are exporting the files to a place where you can find them on your own computer. 
 
-*Due*: Monday, May 2nd at 5 PM
-
-
 * * *
 
-This lab was created by A. Flynt and was adapted by S. Stoudt.
+This lab was created by A. Flynt, adapted by S. Stoudt, and extended by A. Osgood-Zimmerman
